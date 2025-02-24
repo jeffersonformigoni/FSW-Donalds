@@ -1,5 +1,5 @@
 import Image from "next/image";
-import * as navigation from "next/navigation";
+import { notFound } from "next/navigation";
 
 import { db } from "@/lib/prisma";
 
@@ -13,7 +13,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
   const { slug } = await params;
   const restaurant = await db.restaurant.findUnique({ where: { slug } });
   if (!restaurant) {
-    return navigation.notFound();
+    return notFound();
   }
   return (
     <div className="flex h-screen flex-col items-center justify-center px-6 pt-24">
@@ -29,7 +29,7 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
       </div>
       {/* BEM VINDO */}
       <div className="space-y-2 pt-24 text-center">
-        <div className="text-2xl font-semibold">Seja bem-vindo!</div>
+        <h3 className="text-2xl font-semibold">Seja bem-vindo!</h3>
         <p className="opacity-55">
           Escolha como prefere aproveitar sua refeição. Estamos aqui para
           oferecer praticidade e sabor em cada detalhe!
